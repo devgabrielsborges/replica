@@ -22,7 +22,7 @@ src = files(
   'src/print_utils.c'
 )
 
-replica = executable('replica', src,
+replica = executable('rpc', src,
                      c_args : c_args,
                      install : true)
 
