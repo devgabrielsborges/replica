@@ -1,0 +1,21 @@
+---
+
+🚀 Handmark 0.3.2 is here: Smarter, more flexible, and ready for your handwritten notes!
+
+I’ve just shipped a major update to Handmark, the open-source CLI that turns handwritten images into Markdown. This release brings a brand new model configuration system—now you can choose from multiple AI models (Microsoft, OpenAI, Meta) and save your preferences for future runs. The CLI is more intuitive, with improved help, better error handling, and a new version command. Model management is easier than ever, with pretty names, provider info, and rate limits right in the interface.
+
+Why does it matter? You get more control, better accuracy, and a smoother experience digitizing your notes. Whether you’re a student, developer, or researcher, Handmark is now even more powerful for your workflow.
+
+👉 Try the new release, star the repo, and let us know what you think! Contributions and feedback are always welcome.
+
+---
+
+🚀 Handmark 0.3.2 chegou: Mais inteligente, flexível e pronto para suas anotações manuscritas!
+
+Acabei de lançar uma grande atualização do Handmark, o CLI open source que transforma imagens manuscritas em Markdown. Agora você pode escolher entre vários modelos de IA (Microsoft, OpenAI, Meta) e salvar suas preferências para usos futuros. A interface de linha de comando ficou mais intuitiva, com ajuda aprimorada, melhor tratamento de erros e um novo comando de versão. O gerenciamento de modelos está mais fácil, com nomes amigáveis, informações de provedor e limites de uso direto na interface.
+
+Por que isso importa? Você ganha mais controle, precisão e uma experiência mais fluida para digitalizar suas anotações. Seja estudante, dev ou pesquisador, o Handmark está ainda mais poderoso para o seu fluxo de trabalho.
+
+👉 Experimente a nova versão, dê uma estrela no repositório e conte o que achou! Contribuições e feedback são sempre bem-vindos.
+
+#opensource #python #cli #ocr #ai #handmark #produtividade #devtool
