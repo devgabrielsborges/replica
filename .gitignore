@@ -4,3 +4,4 @@ builddir/
 buildDir/
 .idea/
 *.html
+replica-aur/
