@@ -6,6 +6,5 @@ buildDir/
 *.html
 replica-aur/
 
-build-deb.sh
 create-apt-repo.sh
 setup-publishing.sh
