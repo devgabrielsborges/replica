@@ -1,0 +1,76 @@
+name: Build and Release Debian Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build-deb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y meson ninja-build debhelper
+
+      - name: Build Debian package
+        run: ./build-deb.sh
+
+      - name: Upload package as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: debian-package
+          path: "*.deb"
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "*.deb"
+          generate_release_notes: true
+
+  update-apt-repo:
+    needs: build-deb
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    steps:
+      - name: Checkout apt-repo branch
+        uses: actions/checkout@v4
+        with:
+          ref: apt-repo
+          path: apt-repo
+
+      - name: Download package
+        uses: actions/download-artifact@v4
+        with:
+          name: debian-package
+          path: ./
+
+      - name: Update APT repository
+        run: |
+          cp *.deb apt-repo/
+          cd apt-repo
+          dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
+          cat > Release << EOF
+          Archive: stable
+          Component: main
+          Origin: RPC Repository
+          Label: RPC Repository  
+          Architecture: amd64
+          Description: Repository for RPC (Replica) command-line utility
+          Date: $(date -Ru)
+          EOF
+
+      - name: Commit and push apt-repo
+        run: |
+          cd apt-repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "Update APT repository with ${{ github.ref_name }}" || true
+          git push
