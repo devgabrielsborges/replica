@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --buildsystem=meson
+
+override_dh_auto_configure:
+	dh_auto_configure -- --buildtype=release
+
+override_dh_auto_test:
+	dh_auto_test || true
+
+override_dh_install:
+	dh_install
+	# Install additional documentation
+	install -Dm644 README.md debian/rpc/usr/share/doc/rpc/README.md
+	install -Dm644 CHANGELOG.md debian/rpc/usr/share/doc/rpc/CHANGELOG.md
