@@ -251,6 +251,344 @@ int copy_post(const char *dest) {
     return (r1 == 0 && r2 == 0) ? 0 : -1;
 }
 
+int copy_contributing(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/CONTRIBUTING.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/CONTRIBUTING.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/CONTRIBUTING.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/CONTRIBUTING.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_license_template(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/LICENSE.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/LICENSE.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/LICENSE.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/LICENSE.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_security(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/SECURITY.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/SECURITY.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/SECURITY.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/SECURITY.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_code_of_conduct(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/CODE_OF_CONDUCT.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/CODE_OF_CONDUCT.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/CODE_OF_CONDUCT.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/CODE_OF_CONDUCT.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_issue_template(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/ISSUE_TEMPLATE.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/ISSUE_TEMPLATE.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/ISSUE_TEMPLATE.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/ISSUE_TEMPLATE.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_pr_template(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/PULL_REQUEST_TEMPLATE.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/PULL_REQUEST_TEMPLATE.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/PULL_REQUEST_TEMPLATE.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/PULL_REQUEST_TEMPLATE.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_architecture(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/ARCHITECTURE.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/ARCHITECTURE.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/ARCHITECTURE.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/ARCHITECTURE.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_roadmap(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/ROADMAP.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/ROADMAP.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/ROADMAP.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/ROADMAP.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_support(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/SUPPORT.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/SUPPORT.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/SUPPORT.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/SUPPORT.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_install(const char *dest) {
+    // Create directories
+    char prompts_dir[1024];
+    snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
+    if (create_directories(prompts_dir) != 0) {
+        perror("Error creating prompts directory");
+        return -1;
+    }
+
+    char instructions_dir[1024];
+    snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
+    if (create_directories(instructions_dir) != 0) {
+        perror("Error creating instructions directory");
+        return -1;
+    }
+
+    // Copy files
+    char src_path[1024];
+    char dest_path[1024];
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/prompts/INSTALL.prompt.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/prompts/INSTALL.prompt.md", dest);
+    int r1 = copy_file_to_file(src_path, dest_path);
+    
+    construct_source_path(src_path, sizeof(src_path), "/.github/instructions/INSTALL.instructions.md");
+    snprintf(dest_path, sizeof(dest_path), "%s/.github/instructions/INSTALL.instructions.md", dest);
+    int r2 = copy_file_to_file(src_path, dest_path);
+    
+    return (r1 == 0 && r2 == 0) ? 0 : -1;
+}
+
+int copy_all_templates(const char *dest) {
+    // Copy all available templates
+    int results[13];
+    
+    results[0] = copy_readme(dest);
+    results[1] = copy_release_notes(dest);
+    results[2] = copy_post(dest);
+    results[3] = copy_contributing(dest);
+    results[4] = copy_license_template(dest);
+    results[5] = copy_security(dest);
+    results[6] = copy_code_of_conduct(dest);
+    results[7] = copy_issue_template(dest);
+    results[8] = copy_pr_template(dest);
+    results[9] = copy_architecture(dest);
+    results[10] = copy_roadmap(dest);
+    results[11] = copy_support(dest);
+    results[12] = copy_install(dest);
+    
+    // Check if all operations succeeded
+    for (int i = 0; i < 13; i++) {
+        if (results[i] != 0) {
+            return -1;
+        }
+    }
+    
+    return 0;
+}
+
 int copy_file_to_file(const char *src_full_path, const char *dest_full_path) {
     // Create parent directories for dest_full_path if needed
     char dest_dir[1024];
