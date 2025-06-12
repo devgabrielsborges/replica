@@ -4,11 +4,14 @@ Replica (`rpc`) is a cross-platform command-line utility written in C for managi
 
 ## Features
 
-- **Template Initialization**: Quickly set up new projects with predefined README, release notes, and post templates.
-- **Cross-Platform Support**: Works on Linux, macOS, and Windows.
+- **Template Initialization**: Quickly set up new projects with predefined README, release notes, and other template files.
+- **Beautiful CLI Interface**: Modern, colorful output with icons and clear formatting that automatically adapts to terminal capabilities.
+- **Verbose Mode**: Detailed progress output for debugging and monitoring operations.
+- **Robust Error Handling**: User-friendly error messages with helpful suggestions for resolution.
+- **Cross-Platform Support**: Works on Linux, macOS, and Windows with consistent behavior.
 - **AUR Package**: Easy installation for Arch Linux users via the AUR (`rpc-git`).
 - **Automated Dependency Checks**: Installation scripts verify and install required dependencies.
-- **Robust File Copying**: Handles file and directory copying with error handling and support for recursive operations.
+- **Smart File Operations**: Handles file and directory copying with comprehensive error handling and support for recursive operations.
 
 ## Installation
 
@@ -37,18 +40,48 @@ yay -S rpc-git
 After installation, use the `rpc` command:
 
 ```sh
+# Initialize with default templates (README + release notes)
 rpc init <destination>
-# or for specific templates:
+
+# Copy specific templates
 rpc init --readme <destination>
 rpc init --release-notes <destination>
-rpc init --post <destination>
+rpc init --all <destination>
+
+# Use verbose mode for detailed output
+rpc init --verbose --readme <destination>
+
+# Get help and version information
+rpc --help
+rpc --version
 ```
 
-For help:
+### Available Templates
 
-```sh
-rpc help
-```
+The CLI supports the following template categories:
+
+- `--readme` - README generation templates
+- `--release-notes` - Release notes templates  
+- `--post` - LinkedIn post templates
+- `--contributing` - Contributing guidelines templates
+- `--license` - License selection templates
+- `--security` - Security policy templates
+- `--code-of-conduct` - Code of conduct templates
+- `--issue-template` - Issue template prompts
+- `--pr-template` - Pull request template prompts
+- `--architecture` - Architecture documentation templates
+- `--roadmap` - Project roadmap templates
+- `--support` - Support documentation templates
+- `--install` - Installation guide templates
+- `--all` - Copy all available templates
+
+### CLI Features
+
+- **Beautiful Output**: Color-coded messages with icons and progress indicators
+- **Verbose Mode**: Detailed output with `--verbose` flag
+- **Smart Color Detection**: Automatically disables colors when output is piped
+- **Robust Error Handling**: Clear error messages with helpful suggestions
+- **Cross-Platform**: Works consistently across Linux, macOS, and Windows
 
 ## Project Structure
 
