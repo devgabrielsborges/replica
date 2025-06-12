@@ -4,7 +4,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
+#include <stdbool.h>
 #include "copy.h"
+#include "print_utils.h"
 
 #ifndef REPLICA_DATADIR
 #warning "REPLICA_DATADIR is not defined. Using a default relative path for local development."
@@ -19,8 +21,11 @@ int copy_file(const char *src_full_path, const char *dest_dir) {
     struct stat st = {0};
     if (stat(dest_dir, &st) == -1) {
         if (mkdir(dest_dir, 0755) != 0) {
-            perror("Error creating destination directory");
+            print_error("Failed to create destination directory: %s", dest_dir);
             return -1;
+        }
+        if (verbose) {
+            print_info("Created directory: %s", dest_dir);
         }
     }
 
@@ -39,18 +44,15 @@ int copy_file(const char *src_full_path, const char *dest_dir) {
         snprintf(dest_full_path, sizeof(dest_full_path), "%s/%s", dest_dir, filename_ptr);
     }
 
-
     FILE *source = fopen(src_full_path, "rb");
     if (!source) {
-        perror("Error opening source file (fopen)");
-        fprintf(stderr, "Failed to open: %s\n", src_full_path);
+        print_error("Cannot open source file: %s", src_full_path);
         return -1;
     }
 
     FILE *destination_file = fopen(dest_full_path, "wb");
     if (!destination_file) {
-        perror("Error opening destination file (fopen)");
-        fprintf(stderr, "Failed to open for writing: %s\n", dest_full_path);
+        print_error("Cannot create destination file: %s", dest_full_path);
         fclose(source);
         return -1;
     }
@@ -59,7 +61,7 @@ int copy_file(const char *src_full_path, const char *dest_dir) {
     size_t bytes_read;
     while ((bytes_read = fread(buffer, 1, sizeof(buffer), source)) > 0) {
         if (fwrite(buffer, 1, bytes_read, destination_file) != bytes_read) {
-            perror("Error writing to destination file (fwrite)");
+            print_error("Failed to write to destination file: %s", dest_full_path);
             fclose(source);
             fclose(destination_file);
             return -1;
@@ -67,34 +69,39 @@ int copy_file(const char *src_full_path, const char *dest_dir) {
     }
 
     if (ferror(source)) {
-        perror("Error reading from source file (ferror)");
+        print_error("Error reading from source file: %s", src_full_path);
         fclose(source);
         fclose(destination_file);
-        return -1; // Indicate read error
+        return -1;
     }
 
     fclose(source);
     fclose(destination_file);
-    printf("Copied '%s' to '%s'\n", src_full_path, dest_full_path);
+    
+    if (verbose) {
+        print_info("Copied '%s' to '%s'", src_full_path, dest_full_path);
+    }
     return 0;
 }
 
 int copy_directory(const char *src, const char *dest) {
     DIR *dir = opendir(src);
     if (!dir) {
-        perror("Error opening source directory");
+        print_error("Cannot open source directory: %s", src);
         return -1;
     }
 
     struct stat st_dest = {0};
     if (stat(dest, &st_dest) == -1) {
-        if (mkdir(dest, 0755) != 0 && errno != EEXIST) { // Create it, ignore if it already exists
-            perror("Error creating destination directory");
+        if (mkdir(dest, 0755) != 0 && errno != EEXIST) {
+            print_error("Cannot create destination directory: %s", dest);
             closedir(dir);
             return -1;
         }
+        if (verbose) {
+            print_info("Created directory: %s", dest);
+        }
     }
-
 
     struct dirent *entry;
     int result = 0;
@@ -109,15 +116,15 @@ int copy_directory(const char *src, const char *dest) {
             if (stat(src_path_item, &entry_stat) == 0) {
                 if (S_ISDIR(entry_stat.st_mode)) {
                     if (copy_directory(src_path_item, dest_path_item) != 0)
-                        result = -1; // Propagate error
+                        result = -1;
                 } else {
-                    if (copy_file(src_path_item, dest) != 0) { // Pass 'dest' as the target directory
-                        result = -1; // Propagate error
+                    if (copy_file(src_path_item, dest) != 0) {
+                        result = -1;
                     }
                 }
             } else {
-                perror("Error getting stat for source item");
-                result = -1; // Error stating item
+                print_error("Cannot access source item: %s", src_path_item);
+                result = -1;
             }
         }
     }
@@ -142,23 +149,32 @@ static int create_directories(const char *path) {
         if (*p == '/') {
             *p = 0;
             if (mkdir(temp_path, 0755) != 0 && errno != EEXIST) {
+                print_error("Failed to create directory: %s", temp_path);
                 return -1;
             }
             *p = '/';
         }
     }
     if (mkdir(temp_path, 0755) != 0 && errno != EEXIST) {
+        print_error("Failed to create directory: %s", temp_path);
         return -1;
+    }
+    
+    if (verbose) {
+        print_info("Created directory structure: %s", path);
     }
     return 0;
 }
 
 int copy_readme(const char *dest) {
+    if (verbose) {
+        print_progress("Setting up README templates");
+    }
+    
     // Create .github/prompts/ directory
     char prompts_dir[1024];
     snprintf(prompts_dir, sizeof(prompts_dir), "%s/.github/prompts", dest);
     if (create_directories(prompts_dir) != 0) {
-        perror("Error creating prompts directory");
         return -1;
     }
 
@@ -166,7 +182,6 @@ int copy_readme(const char *dest) {
     char instructions_dir[1024];
     snprintf(instructions_dir, sizeof(instructions_dir), "%s/.github/instructions", dest);
     if (create_directories(instructions_dir) != 0) {
-        perror("Error creating instructions directory");
         return -1;
     }
 
@@ -600,7 +615,7 @@ int copy_file_to_file(const char *src_full_path, const char *dest_full_path) {
         struct stat st = {0};
         if (stat(dest_dir, &st) == -1) {
             if (mkdir(dest_dir, 0755) != 0 && errno != EEXIST) {
-                perror("Error creating parent directory for destination file");
+                print_error("Failed to create parent directory: %s", dest_dir);
                 return -1;
             }
         }
@@ -608,15 +623,13 @@ int copy_file_to_file(const char *src_full_path, const char *dest_full_path) {
 
     FILE *source = fopen(src_full_path, "rb");
     if (!source) {
-        perror("Error opening source file (fopen)");
-        fprintf(stderr, "Failed to open: %s\n", src_full_path);
+        print_error("Cannot open source file: %s", src_full_path);
         return -1;
     }
 
     FILE *destination_file = fopen(dest_full_path, "wb");
     if (!destination_file) {
-        perror("Error opening destination file (fopen)");
-        fprintf(stderr, "Failed to open for writing: %s\n", dest_full_path);
+        print_error("Cannot create destination file: %s", dest_full_path);
         fclose(source);
         return -1;
     }
@@ -625,7 +638,7 @@ int copy_file_to_file(const char *src_full_path, const char *dest_full_path) {
     size_t bytes_read;
     while ((bytes_read = fread(buffer, 1, sizeof(buffer), source)) > 0) {
         if (fwrite(buffer, 1, bytes_read, destination_file) != bytes_read) {
-            perror("Error writing to destination file (fwrite)");
+            print_error("Failed to write to destination file: %s", dest_full_path);
             fclose(source);
             fclose(destination_file);
             return -1;
@@ -633,7 +646,7 @@ int copy_file_to_file(const char *src_full_path, const char *dest_full_path) {
     }
 
     if (ferror(source)) {
-        perror("Error reading from source file (ferror)");
+        print_error("Error reading from source file: %s", src_full_path);
         fclose(source);
         fclose(destination_file);
         return -1;
@@ -641,6 +654,9 @@ int copy_file_to_file(const char *src_full_path, const char *dest_full_path) {
 
     fclose(source);
     fclose(destination_file);
-    printf("Copied '%s' to '%s'\n", src_full_path, dest_full_path);
+    
+    if (verbose) {
+        print_info("Copied '%s' to '%s'", src_full_path, dest_full_path);
+    }
     return 0;
 }

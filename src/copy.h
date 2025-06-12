@@ -2,6 +2,10 @@
 #define COPY_H
 
 #include <stdio.h>
+#include <stdbool.h>
+
+// External verbose flag
+extern bool verbose;
 
 int copy_file(const char *source, const char *destination);
 int copy_directory(const char *source, const char *destination);
