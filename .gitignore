@@ -8,3 +8,4 @@ replica-aur/
 
 create-apt-repo.sh
 setup-publishing.sh
+*.deb

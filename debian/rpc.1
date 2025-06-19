@@ -1,0 +1,130 @@
+.TH RPC 1 "June 2025" "Replica 1.0.0" "User Commands"
+.SH NAME
+rpc \- Template management tool for project initialization
+.SH SYNOPSIS
+.B rpc
+.I COMMAND
+.RI [ OPTIONS ]
+.RI [ ARGUMENTS ]
+.SH DESCRIPTION
+.B Replica (rpc)
+is a modern, cross-platform command-line utility written in C for managing and copying project templates and prompt instructions. It is designed to streamline the setup of new projects by providing quick initialization of README files, release notes, contributing guidelines, and other essential project documentation templates.
+
+The tool features a beautiful, colorized CLI interface with modern styling elements including borders, icons, and progress indicators to enhance the user experience.
+.SH COMMANDS
+.TP
+.B init
+Initialize templates in a target directory. This is the primary command for installing project templates.
+.TP
+.B help
+Display comprehensive help information with usage examples and available templates.
+.TP
+.B version
+Show version information and project details.
+.SH TEMPLATE OPTIONS
+When using the
+.B init
+command, you can specify specific templates to install:
+.TP
+.B \-\-readme
+Professional README.md generation templates
+.TP
+.B \-\-release\-notes
+Comprehensive release documentation templates
+.TP
+.B \-\-post
+LinkedIn and social media content templates
+.TP
+.B \-\-contributing
+Contributor guidelines and standards templates
+.TP
+.B \-\-license
+Software license selection templates
+.TP
+.B \-\-security
+Security guidelines and policy templates
+.TP
+.B \-\-code\-of\-conduct
+Community behavior standards templates
+.TP
+.B \-\-issue\-template
+GitHub issue reporting templates
+.TP
+.B \-\-pr\-template
+Pull request contribution templates
+.TP
+.B \-\-architecture
+Technical architecture documentation templates
+.TP
+.B \-\-roadmap
+Development planning and milestone templates
+.TP
+.B \-\-support
+User help and troubleshooting guide templates
+.TP
+.B \-\-install
+Setup and deployment instruction templates
+.TP
+.B \-\-all
+Complete package with all available templates and resources
+.SH GLOBAL OPTIONS
+.TP
+.BR \-h ", " \-\-help
+Show help message and exit
+.TP
+.BR \-v ", " \-\-version
+Show version information and exit
+.SH EXAMPLES
+.TP
+Quick start with default templates (README + Release Notes):
+.B rpc init ./my-project
+.TP
+Install specific template:
+.B rpc init \-\-readme ./docs
+.TP
+Install all available templates:
+.B rpc init \-\-all ./complete-project
+.TP
+Display help information:
+.B rpc help
+.SH FILES
+.TP
+.I /usr/share/replica/.github/
+Directory containing template files and project prompts
+.TP
+.I /usr/share/doc/replica/
+Documentation files including README, CHANGELOG, and LICENSE
+.SH ENVIRONMENT
+.TP
+.B TERM
+Used to detect terminal capabilities for color output
+.TP
+.B COLORTERM
+Used to enable colored output in supported terminals
+.SH EXIT STATUS
+.B rpc
+exits with status 0 on success, and >0 if an error occurs.
+.SH COLOR SUPPORT
+The program automatically detects terminal color support and provides enhanced visual output including:
+.IP \(bu 2
+Colored text and backgrounds
+.IP \(bu 2
+Unicode box drawing characters
+.IP \(bu 2
+Progress indicators
+.IP \(bu 2
+Icon-enhanced output
+.IP \(bu 2
+Styled panels and banners
+.SH AUTHOR
+Written by Gabriel Souza Borges.
+.SH REPORTING BUGS
+Report bugs at: https://github.com/devgabrielsborges/replica/issues
+.SH COPYRIGHT
+Copyright \(co 2025 Gabriel Souza Borges.
+License MIT: MIT License <https://opensource.org/licenses/MIT>.
+.br
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+.SH SEE ALSO
+Full documentation and source code: https://github.com/devgabrielsborges/replica
