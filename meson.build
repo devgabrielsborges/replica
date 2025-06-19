@@ -19,7 +19,7 @@ endif
 
 c_args = ['-DREPLICA_DATADIR="@0@"'.format(datadir_abs)]
 
-src = files('src/copy.c', 'src/main.c', 'src/print_utils.c')
+src = files('src/copy.c', 'src/main.c', 'src/print_utils.c', 'src/cli_utils.c')
 
 replica = executable('rpc', src, c_args: c_args, install: true)
 

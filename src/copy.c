@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include "copy.h"
+#include "cli_utils.h"
 
 #ifndef REPLICA_DATADIR
 #warning "REPLICA_DATADIR is not defined. Using a default relative path for local development."
@@ -75,7 +76,11 @@ int copy_file(const char *src_full_path, const char *dest_dir) {
 
     fclose(source);
     fclose(destination_file);
-    printf("Copied '%s' to '%s'\n", src_full_path, dest_full_path);
+    
+    char success_msg[512];
+    snprintf(success_msg, sizeof(success_msg), "Copied '%s'", strrchr(src_full_path, '/') ? strrchr(src_full_path, '/') + 1 : src_full_path);
+    cli_print_step(success_msg);
+    
     return 0;
 }
 
@@ -641,6 +646,10 @@ int copy_file_to_file(const char *src_full_path, const char *dest_full_path) {
 
     fclose(source);
     fclose(destination_file);
-    printf("Copied '%s' to '%s'\n", src_full_path, dest_full_path);
+    
+    char success_msg[512];
+    snprintf(success_msg, sizeof(success_msg), "Copied '%s'", strrchr(src_full_path, '/') ? strrchr(src_full_path, '/') + 1 : src_full_path);
+    cli_print_step(success_msg);
+    
     return 0;
 }
