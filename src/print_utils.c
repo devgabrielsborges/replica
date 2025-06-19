@@ -158,11 +158,11 @@ void print_help(const char *prog) {
     // Footer with links
     if (cli_supports_color()) {
         cli_print_status_bar(
-            "💡 Learn more at https://github.com/devgabrielsborges/replica", 
-            "Made with ❤️ by Gabriel Borges"
+            "💡 Learn more at https://github.com/devgabrielsborges/replica    ", 
+            "Made by Gabriel Borges"
         );
     } else {
         printf("Learn more: https://github.com/devgabrielsborges/replica\n");
-        printf("Made with love by Gabriel Borges\n");
+        printf("Made by Gabriel Borges\n");
     }
 }
