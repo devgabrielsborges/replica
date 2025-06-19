@@ -27,7 +27,7 @@ static void print_version(void) {
         
         printf("  ");
         cli_print_badge("Website", BG_BRIGHT_MAGENTA, BRIGHT_WHITE);
-        printf(" https://github.com/gsborgz/replica\n");
+        printf(" https://github.com/devgabrielsborges/replica\n");
         
         printf("  ");
         cli_print_badge("Platform", BG_BRIGHT_YELLOW, BLACK);
@@ -35,7 +35,7 @@ static void print_version(void) {
     } else {
         printf("Author:   Gabriel Souza Borges\n");
         printf("License:  MIT License\n");
-        printf("Website:  https://github.com/gsborgz/replica\n");
+        printf("Website:  https://github.com/devgabrielsborges/replica\n");
         printf("Platform: Cross-platform\n");
     }
     
