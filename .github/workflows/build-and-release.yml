@@ -18,8 +18,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y meson ninja-build debhelper
 
+      - name: Make build-deb.sh executable
+        run: chmod +x ./build-deb.sh
+
       - name: Build Debian package
-        run: chmod +x build-deb.sh | ./build-deb.sh
+        run: ./build-deb.sh
 
       - name: Upload package as artifact
         uses: actions/upload-artifact@v4
